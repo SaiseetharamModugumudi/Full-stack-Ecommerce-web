@@ -148,5 +148,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 RAZORPAY_KEY_ID = 'rzp_test_gmNV6d0IgHC0g8'
 RAZORPAY_KEY_SECRET = 'WYpmrAjgeRPzLGZuZpqAyH8b'
 
+WSGI_APPLICATION = 'Ecommerce.wsgi.application'
+
 # RAZORPAY_KEY_ID = 'rzp_test_5Z0zF57atG3j8t'
 # RAZORPAY_KEY_SECRET = '92ASZcqvQcILG5HBwuYMLhz7'
