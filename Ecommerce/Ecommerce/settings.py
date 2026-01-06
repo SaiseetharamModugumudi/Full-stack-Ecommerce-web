@@ -116,6 +116,13 @@ else:
         }
     }
 
+# Ensure HOST is not None for MySQL
+if 'default' in DATABASES and DATABASES['default'].get('ENGINE') == 'django.db.backends.mysql':
+    if DATABASES['default'].get('HOST') is None:
+        DATABASES['default']['HOST'] = 'localhost'
+    if DATABASES['default'].get('PORT') is None:
+        DATABASES['default']['PORT'] = 3306
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -169,7 +176,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 RAZORPAY_KEY_ID = 'rzp_test_gmNV6d0IgHC0g8'
 RAZORPAY_KEY_SECRET = 'WYpmrAjgeRPzLGZuZpqAyH8b'
 
-WSGI_APPLICATION = 'Ecommerce.wsgi.application'
+WSGI_APPLICATION = 'Ecommerce.Ecommerce.wsgi.application'
 
 # RAZORPAY_KEY_ID = 'rzp_test_5Z0zF57atG3j8t'
 # RAZORPAY_KEY_SECRET = '92ASZcqvQcILG5HBwuYMLhz7'
