@@ -16,7 +16,7 @@ CATEGORY_CHOICES = (
     ('TRUMPETS','TRUMPETS'),
     ('PADS','Pads'),
     ('SAXOPHONE','Saxophone'),
-    ('SITAR','Sitar')
+    ('SITAR','Sitar')   
 )
 
 class Product(models.Model):

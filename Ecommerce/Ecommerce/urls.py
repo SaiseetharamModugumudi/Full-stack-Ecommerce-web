@@ -20,7 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 
-from app1.views import home,Category,ProfileView,Product_Details,About,Sign_Up,Login,Logout,update_address,delete_address,add_to_cart,show_Cart,plus_cart,minus_cart,remove_cart,Checkout,paymenthandler,wishlist_view,minus_wishlist,plus_wishlist,View_all,Search,Orders,contact
+from Ecommerce.app1.views import home,Category,ProfileView,Product_Details,About,Sign_Up,Login,Logout,update_address,delete_address,add_to_cart,show_Cart,plus_cart,minus_cart,remove_cart,Checkout,paymenthandler,wishlist_view,minus_wishlist,plus_wishlist,View_all,Search,Orders,contact
 
 urlpatterns = [
 

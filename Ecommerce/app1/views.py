@@ -11,9 +11,9 @@ from django.db.models import Q
 from django.db.models import Count
 from django.contrib.auth.models import User
 
-from app1.forms import CustomerDetailsForm
+from Ecommerce.app1.forms import CustomerDetailsForm
 
-from app1.models import Coustomer_Details,Contact
+from Ecommerce.app1.models import Coustomer_Details,Contact
 from django.contrib.auth.decorators import login_required
 
 from django.views import View
@@ -21,7 +21,7 @@ from django.views import View
 from django.contrib import messages
 
 
-from app1.models import Product,Cart,Coustomer_Details,Payment,Wishlist,Order_Placed
+from Ecommerce.app1.models import Product,Cart,Coustomer_Details,Payment,Wishlist,Order_Placed
 
 from django.contrib.auth import authenticate,login,logout
 import razorpay
