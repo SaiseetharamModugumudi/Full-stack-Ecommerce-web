@@ -68,25 +68,46 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Ecommerce.wsgi.application'
-
+import os
+WSGI_APPLICATION = 'Ecommerce.Ecommerce.wsgi.application'
 
 # Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-import os
+# Prefer explicit MySQL env vars on Render, otherwise parse DATABASE_URL
+from django.core.exceptions import ImproperlyConfigured
+DATABASES = {}
 if os.environ.get("RENDER"):
-# Production (Render + Railway MySQL)
-    DATABASES = {
-    "default": {
-    "ENGINE": "django.db.backends.mysql",
-    "NAME": os.environ.get("MYSQLDATABASE"),
-    "USER": os.environ.get("MYSQLUSER"),
-    "PASSWORD": os.environ.get("MYSQLPASSWORD"),
-    "HOST": os.environ.get("MYSQLHOST"),
-    "PORT": os.environ.get("MYSQLPORT", "3306"),
-    }
-}
+    mysql_host = os.environ.get("MYSQLHOST")
+    mysql_name = os.environ.get("MYSQLDATABASE")
+    mysql_user = os.environ.get("MYSQLUSER")
+    mysql_password = os.environ.get("MYSQLPASSWORD")
+    mysql_port = os.environ.get("MYSQLPORT") or "3306"
+    if mysql_host and mysql_name and mysql_user is not None:
+        DATABASES = {
+            "default": {
+                "ENGINE": "django.db.backends.mysql",
+                "NAME": mysql_name,
+                "USER": mysql_user,
+                "PASSWORD": mysql_password,
+                "HOST": mysql_host,
+                "PORT": mysql_port,
+            }
+        }
+    elif os.environ.get("DATABASE_URL"):
+        # Use dj-database-url if DATABASE_URL is provided
+        try:
+            import dj_database_url
+
+            DATABASES["default"] = dj_database_url.parse(os.environ.get("DATABASE_URL"))
+        except Exception as e:
+            raise ImproperlyConfigured("DATABASE_URL set but dj-database-url not available: %s" % e)
+    else:
+        # Fall back to sqlite on Render if no DB env vars provided
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': BASE_DIR / 'db.sqlite3',
+            }
+        }
 else:
     DATABASES = {
         'default': {
